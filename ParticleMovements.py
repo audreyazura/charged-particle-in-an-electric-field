@@ -1,4 +1,4 @@
-from UtilFunc import FindValue, ExtractTables, FindIndex
+from FuncUtil import *
 from math import sqrt
 from numpy.random import normal
 from os import path, mkdir, remove
@@ -87,28 +87,6 @@ def CalculateMovement (x0, v0, maxLoop, absisse, Efield):
 			nsteps = maxLoop+1
 			return xcalc, vcalc, acalc, tcalc, err.args[0]
 	return xcalc, vcalc, acalc, tcalc, 0
-			
-#~ 			if err.args[0] == "max":
-#~ 				with open("ElectronMovement.log", "a") as logFile:
-#~ 					print("The electron went out of the front of the sample.", file=logFile)
-#~ 					print(" ".join(["x_notch = ", pos, "nm"]), file=logFile)
-#~ 					print(" ".join(["Efield =", E, "V"]), file=logFile)
-#~ 					print(" ".join(["x_start =", str(xcalc[0]), "micrometer"]), file=logFile)
-#~ 					print(" ".join(["x_e =", str(xt), "micrometer"]), file=logFile)
-#~ 					print(" ".join(["v_e =", str(vx), "m/s"]), file=logFile)
-#~ 					print(" ".join(["n_steps =", str(nsteps)]), file=logFile)
-#~ 					print("", file=logFile)
-			
-#~ 			if err.args[0] == "min":
-#~ 				with open("ElectronMovement.log", "a") as logFile:
-#~ 					print("The electron went out of the back of the sample.", file=logFile)
-#~ 					print(" ".join(["x_notch = ", pos, "nm"]), file=logFile)
-#~ 					print(" ".join(["Efield =", E, "V"]), file=logFile)
-#~ 					print(" ".join(["x_start =", str(xcalc[0]), "micrometer"]), file=logFile)
-#~ 					print(" ".join(["x_e =", str(xt), "micrometer"]), file=logFile)
-#~ 					print(" ".join(["v_e =", str(vx), "m/s"]), file=logFile)
-#~ 					print(" ".join(["n_steps =", str(nsteps)]), file=logFile)
-#~ 					print("", file=logFile)
 			
 if not(path.isdir("".join(["Extract/Notch/", particle, "Movement"]))):
 	mkdir("".join(["Extract/Notch/", particle, "Movement"]))
