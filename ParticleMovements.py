@@ -93,7 +93,7 @@ def CalculateMovement (x0, v0, maxLoop, absisse, Efield):
 			ax = q*Ex/m
 			acalc.append(ax)
 			
-			vchange = (vx+ax*dt)/2
+			vchange = vx+ax*dt/2		#we take the average velocity of the particle during the interval dt as (v(initial)+v(final))/2
 			vx += ax*dt
 			vcalc.append(vx)
 
