@@ -23,7 +23,7 @@ from multiprocessing import Pool, current_process
 #~ from progressbar import ProgressBar
 
 #number of processus we want to spawn for that calculation
-nproc = 6
+nproc = 8
 
 #electron
 particle = "Electron"
@@ -37,9 +37,11 @@ q = -1.60217733*10**(-19)		#C, elementary charge
 #~ particle = "Hole"
 #~ EfieldName = "Einternal"
 #~ maxSteps = 50000
-#~ nvelocity = 1000
+#~ nvelocity = 5000
 #~ m = 9.10938188*10**(-31)*0.693		#kg, hole effective mass
 #~ q = 1.60217733*10**(-19)			#C, elementary charge
+
+print("".join(["======= SIMULATIONS FOR ", particle.upper(), " ======"]))
 
 #for notch position variations
 inputFolder = "".join(["Extract/Notch/", EfieldName, "/"])
@@ -201,7 +203,7 @@ def WorkerCalc (E, pos):
 			frontFirst = True
 			backFirst = True
 			
-			print("".join([current_process().name, " : Beginning of velocity calculation for x_notch = ", pos, " nm and x_initial = ", str(xi), "nm."]))
+			print("".join([current_process().name, " : Starting calculations for x_notch = ", pos, " nm and x_initial = ", str(xi), "nm."]))
 			#~ pbar = ProgressBar()
 			#~ for vi in pbar(vinits):
 			for vi in vinits:
