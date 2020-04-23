@@ -54,25 +54,25 @@ Efields = ["0.8"]
 
 
 #physical constant and conversions
-kB = 1380649*10**(-23)				#J/K
+kB = 1.380649*10**(-23)				#J/K
 T = 300								#K
 dt = 10**(-12)						#step every fs
 vth = sqrt(kB*T/m)					#m/s
 
 #definition of initial velocities: if a file with them exists, we take it (if it has the right size), otherwise, we generate and save them
 vinits = []
-if path.isfile("ElectronSpeeds.dat"):
-	with open("ElectronSpeeds.dat", "r") as speedFile:
+if path.isfile("ParticleSpeeds.dat"):
+	with open("ParticleSpeeds.dat", "r") as speedFile:
 		for speed in speedFile:
 			vinits.append(float(speed))
 	if not(len(vinits) == nvelocity):
-		remove("ElectronSpeeds.dat")
+		remove("ParticleSpeeds.dat")
 	
-if not(path.isfile("ElectronSpeeds.dat")):
+if not(path.isfile("ParticleSpeeds.dat")):
 	vinits = [1.0, 1.0]
 	while(not(len(vinits)==len(set(vinits)))):
 		vinits = normal(0, vth, nvelocity)
-	with open("ElectronSpeeds.dat", "w") as speedFile:
+	with open("ParticleSpeeds.dat", "w") as speedFile:
 		for speed in vinits:
 			print(speed, file=speedFile)
 
@@ -121,7 +121,7 @@ def WorkerCalc (E, pos):
 	if not(path.isdir(fullOutputEfieldFolder)):
 		mkdir(fullOutputEfieldFolder)
 
-	inputFile = "".join([inputFolder, "Light/E", E, "V/E", E, "V_Notch", pos, "nm_Light.sim"])
+	inputFile = "".join([inputFolder, "Light/E", E, "V/E", E, "V_Notch", pos, "nm.sim"])
 	accelerationFile = "".join([accelerationFolder, "Notch", pos, "nm_Acceleration.sim"])
 	
 	notchFolder = "".join([fullOutputEfieldFolder, "Notch", pos, "nm/"])
@@ -406,3 +406,5 @@ print("")
 workerpool = Pool(nproc)
 valuelist = [(E, notch) for E in Efields for notch in notchPositions]
 workerpool.starmap(WorkerCalc, valuelist)
+
+print("")
